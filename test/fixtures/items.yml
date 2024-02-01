@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  planned_amount: 1.5
+  allocated_amount: 1.5
+  item_type: MyString
+  label: MyString
+
+two:
+  planned_amount: 1.5
+  allocated_amount: 1.5
+  item_type: MyString
+  label: MyString
