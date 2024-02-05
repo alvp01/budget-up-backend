@@ -3,7 +3,7 @@ class CreateBudgets < ActiveRecord::Migration[7.1]
     create_table :budgets do |t|
       t.float :planned_amount,   null: false
       t.float :remaining_amount, null: false
-      t.date  :budget_date,      null: false, default: Date.today
+      t.date  :budget_date,      null: false
 
       t.timestamps
     end
