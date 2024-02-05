@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_145921) do
   create_table "budgets", force: :cascade do |t|
     t.float "planned_amount", null: false
     t.float "remaining_amount", null: false
-    t.date "budget_date", default: "2024-02-01", null: false
+    t.date "budget_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -50,7 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_145921) do
 
   create_table "items", force: :cascade do |t|
     t.float "planned_amount", default: 0.0, null: false
-    t.float "allocated_amount", default: 0.0, null: false
+    t.float "remaining_amount", default: 0.0, null: false
     t.integer "item_type", default: 0, null: false
     t.string "label"
     t.integer "category_id"
@@ -66,8 +66,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_145921) do
     t.string "note"
     t.float "amount", default: 0.0, null: false
     t.integer "item_id", null: false
+    t.integer "budget_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_transactions_on_budget_id"
     t.index ["item_id"], name: "index_transactions_on_item_id"
   end
 
