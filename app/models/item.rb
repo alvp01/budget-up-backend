@@ -5,4 +5,6 @@ class Item < ApplicationRecord
 
   has_many :categories, through: :item_categories
   has_many :transactions, through: :item_transactions
+
+  enum :item_type, ["income", "expense"]
 end
