@@ -1,9 +1,20 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# frozen_string_literal: true
+
+puts 'Seeding the budget to the database ...'
+
+Budget.find_or_create_by!(budget_date: Date.today, planned_amount: 100, remaining_amount: 100)
+
+puts 'Budget created.'
+
+puts 'Seeding the categories to the database ...'
+
+budget = Budget.first
+
+["income", "fixed bills", "savings", "variable bills", "debt"].each do |category_string|
+  category = Category.create!(category_type: category_string, budget_id: budget.id)
+  budget.categories << category
+  puts "created category #{category_string}"
+end
+
+puts "categories created"
+
