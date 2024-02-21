@@ -11,7 +11,7 @@ puts 'Seeding the categories to the database ...'
 budget = Budget.first
 
 ["income", "fixed bills", "savings", "variable bills", "debt"].each do |category_string|
-  category = Category.create!(category_type: category_string, budget_id: budget.id)
+  category = Category.create!(category_type: category_string)
   budget.categories << category
   puts "created category #{category_string}"
 end
