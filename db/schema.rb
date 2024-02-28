@@ -24,14 +24,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_130515) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_type", null: false
-    t.boolean "is_default", default: false
+    t.bigint "budget_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_categories_on_budget_id"
   end
 
   create_table "item_transactions", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "transaction_id"
+    t.bigint "item_id"
+    t.bigint "transaction_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_item_transactions_on_item_id"
@@ -41,10 +42,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_130515) do
   create_table "items", force: :cascade do |t|
     t.float "planned_amount", default: 0.0, null: false
     t.float "remaining_amount", default: 0.0, null: false
-    t.integer "item_type", default: 0, null: false
+    t.integer "item_type", default: 1, null: false
     t.string "label"
-    t.integer "category_id"
-    t.integer "budget_id", null: false
+    t.bigint "category_id"
+    t.bigint "budget_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["budget_id"], name: "index_items_on_budget_id"
@@ -54,9 +55,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_130515) do
   create_table "transactions", force: :cascade do |t|
     t.datetime "date"
     t.string "note"
+    t.bigint "item_id"
+    t.bigint "budget_id"
     t.float "amount", default: 0.0, null: false
-    t.integer "item_id", null: false
-    t.integer "budget_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["budget_id"], name: "index_transactions_on_budget_id"

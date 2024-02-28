@@ -1,4 +1,4 @@
 class Category < ApplicationRecord
-  belongs_to :budget
-  has_many   :items
+  has_many :items
+  belongs_to :budget, dependent: :destroy
 end
