@@ -1,7 +1,7 @@
-class BudgetsController < ApplicationController
+class Api::V1::BudgetsController < ApplicationController
   before_action :set_budget, only: %i[show destroy update]
   def index
-    @budgets = Budget.includes(:categories, :items, :transactions)
+    @budgets = Budget.all
     render json: { budgets: @budgets, success: true, message: "Budgets fetched successfully" }
   end
 
