@@ -1,5 +1,7 @@
 class Api::V1::BudgetsController < ApplicationController
-  before_action :set_budget, only: %i[show destroy update]
+  before_action :set_budget, only: %i[destroy update]
+  before_action :set_budget_by_year_and_month, only: %i[budget_by_year_and_month]
+
   def index
     @budgets = Budget.all
     render json: { budgets: @budgets, success: true, message: "Budgets fetched successfully" }
@@ -34,10 +36,18 @@ class Api::V1::BudgetsController < ApplicationController
     end
   end
 
+  def budget_by_year_and_month
+    render json: { budget: @budget, success: true, message: "Budget fetched successfully" }
+  end
+
   private
 
   def set_budget
     @budget = Budget.find(params[:id])
+  end
+
+  def set_budget_by_year_and_month
+    @budget = Budget.where("date_part('year', budget_date) = ? AND date_part('month', budget_date) = ?", params[:year], params[:month]).first
   end
 
   def budget_params

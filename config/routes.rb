@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :budgets
+      get "budget", to: "budgets#budget_by_year_and_month"
     end
   end
 end
